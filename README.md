@@ -1,8 +1,15 @@
-# 🤖 Controle de Motores DC com Arduino e Ponte H
+# 🤖 Controle de Motores DC com Arduino e Ponte H L298N
 
-Projeto simples e didático para controlar dois motores DC utilizando **Arduino** e uma **Ponte H**.
+Projeto simples, didático e completo para controlar dois motores DC utilizando **Arduino Uno** e uma **Ponte H L298N**.
 
-Este projeto é ideal para robôs móveis, carrinhos autônomos, robôs sumô, projetos de robótica educacional e testes iniciais com motores.
+Este projeto é ideal para:
+
+- Robôs móveis;
+- Carrinhos autônomos;
+- Robôs sumô;
+- Projetos de robótica educacional;
+- Testes iniciais com motores DC;
+- Aulas de Arduino, eletrônica e sistemas embarcados.
 
 ---
 
@@ -23,7 +30,7 @@ O objetivo deste projeto é demonstrar como controlar dois motores DC usando uma
 | Componente | Quantidade |
 |---|---:|
 | Arduino Uno | 1 |
-| Ponte H / Driver de Motor | 1 |
+| Ponte H L298N / Driver de Motor | 1 |
 | Motor DC | 2 |
 | Rodas | 2 |
 | Bateria externa para motores | 1 |
@@ -34,29 +41,58 @@ O objetivo deste projeto é demonstrar como controlar dois motores DC usando uma
 
 ## 🔌 Tabela de Pinagens
 
-| Ponte H | Pino Arduino | Função |
+| Ponte H L298N | Pino Arduino | Função |
 |---|---:|---|
-| IN1 | 2 | Controle do Motor A |
-| IN2 | 3 | Controle do Motor A |
-| IN3 | 4 | Controle do Motor B |
-| IN4 | 5 | Controle do Motor B |
-| VCC lógico | 5V | Alimentação lógica da Ponte H |
-| GND | GND | Terra comum |
-| VM / 12V / Motor Power | Bateria externa | Alimentação dos motores |
-| OUT1 e OUT2 | Motor A | Saída para o motor esquerdo ou direito |
-| OUT3 e OUT4 | Motor B | Saída para o outro motor |
+| IN1 | 2 | Controle do sentido do Motor A |
+| IN2 | 3 | Controle do sentido do Motor A |
+| IN3 | 4 | Controle do sentido do Motor B |
+| IN4 | 5 | Controle do sentido do Motor B |
+| OUT1 | Motor A | Saída para um fio do Motor A |
+| OUT2 | Motor A | Saída para o outro fio do Motor A |
+| OUT3 | Motor B | Saída para um fio do Motor B |
+| OUT4 | Motor B | Saída para o outro fio do Motor B |
+| GND | GND Arduino | Terra comum |
+| 5V / VLogic | 5V Arduino ou saída 5V da ponte | Alimentação lógica, depende do jumper |
+| 12V / VMS / VIN | Bateria externa | Alimentação dos motores |
 
 ---
 
-## ⚠️ Atenção à Alimentação
+## ⚠️ Atenção Muito Importante Sobre a Alimentação
 
-Os motores **não devem ser alimentados diretamente pelo Arduino**, pois eles consomem mais corrente do que a placa consegue fornecer.
+Os motores **não devem ser alimentados diretamente pelo Arduino**.
 
-Use uma bateria externa para alimentar os motores pela Ponte H.
+O Arduino fornece pouca corrente para alimentar motores DC. Se você tentar alimentar os motores diretamente pelo pino 5V do Arduino, podem ocorrer problemas como:
 
-Também é muito importante ligar todos os terras juntos:
+- Arduino reiniciando sozinho;
+- Motores fracos;
+- Ponte H esquentando;
+- Travamentos;
+- Baixa velocidade;
+- Possível dano na placa.
 
-```text
+Por isso, use uma **bateria externa** para alimentar os motores pela Ponte H.
+
+---
+
+## 🔋 Como Alimentar a Ponte H L298N Corretamente
+
+A Ponte H L298N normalmente possui três pontos principais de alimentação:
+
+| Pino / Borne | Função |
+|---|---|
+| 12V / VMS / VIN | Entrada da bateria dos motores |
+| GND | Terra da alimentação |
+| 5V / VLogic | Alimentação lógica do circuito interno |
+
+---
+
+## 🧠 Regra Principal do GND Comum
+
+Mesmo usando bateria externa para os motores, o Arduino e a Ponte H precisam ter o mesmo referencial elétrico.
+
+Portanto, ligue juntos:
+
+
 GND do Arduino
 GND da Ponte H
 GND da bateria externa
